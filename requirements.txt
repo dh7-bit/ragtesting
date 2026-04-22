@@ -2,4 +2,4 @@ flask
 chromadb
 requests
 gunicorn
-fastembed
+
