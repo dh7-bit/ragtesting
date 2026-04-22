@@ -1,4 +1,6 @@
 import os 
+from dotenv import load_dotenv
+load_dotenv()
 GROQ_API_KEY=os.getenv('Groq_key')
 import requests
 def groq_chat(prompt):

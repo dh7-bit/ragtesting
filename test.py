@@ -4,19 +4,35 @@ import os
 import requests
 from groqchat import groq_chat
 app = Flask(__name__)
-
+from dotenv import load_dotenv
+load_dotenv()
 # -----------------------------
 # ENV VARIABLES
 # -----------------------------
 GROQ_API_KEY = os.getenv('GROQ_API_KEY')
-HF_API_KEY = os.getenv("HF_TOKEN")
-from fastembed import TextEmbedding
-
-# lightweight model (production-safe)
-embedding_model = TextEmbedding(model_name="BAAI/bge-small-en-v1.5")
-
+VOYAGE_API_KEY = os.getenv("VOYAGE_API_KEY")
+print(VOYAGE_API_KEY)
 def get_embedding(text):
-    return list(embedding_model.embed([text]))[0].tolist()
+    response = requests.post(
+        "https://api.voyageai.com/v1/embeddings",
+        headers={
+            "Authorization": f"Bearer {VOYAGE_API_KEY}",
+            "Content-Type": "application/json"
+        },
+        json={
+            "input": text,
+            "model": "voyage-3"
+        }
+    )
+
+    data = response.json()
+
+    print("VOYAGE RESPONSE:", data)  # 🔥 debug
+
+    if "error" in data:
+        raise Exception(f"Voyage Error: {data['error']}")
+
+    return data["data"][0]["embedding"]
 
 # -----------------------------
 # 3. VECTOR DB (Chroma)
