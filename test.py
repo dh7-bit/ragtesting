@@ -12,11 +12,11 @@ app = Flask(__name__)
 # -----------------------------
 # ENV VARIABLES
 # -----------------------------
-GROQ_API_KEY = os.getenv('GROQ_API_KEY')
+
 VOYAGE_API_KEY = os.getenv("VOYAGE_API_KEY")
 
 print("VOYAGE KEY LOADED:", bool(VOYAGE_API_KEY))
-print("GROQ KEY LOADED:", bool(GROQ_API_KEY))
+
 
 
 # -----------------------------
@@ -81,7 +81,7 @@ def ask_rag(query, session_id):
 
         results = collection.query(
             query_embeddings=[query_embedding],
-            n_results=5,
+            n_results=2,
             where={"session_id": session_id}
         )
 
