@@ -18,7 +18,7 @@ def groq_chat(prompt):
         ]
     }
 
-    response = requests.post(url, headers=headers, json=payload)
+    response = requests.post(url, headers=headers, json=payload,timeout=30)
     response.raise_for_status()
 
     return response.json()["choices"][0]["message"]["content"]

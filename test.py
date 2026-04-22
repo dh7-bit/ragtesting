@@ -39,7 +39,8 @@ def get_embedding(text):
             json={
                 "input": text,
                 "model": "voyage-3"
-            }
+            },
+            timeout=30
         )
 
         data = response.json()
