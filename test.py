@@ -117,8 +117,10 @@ Answer:
 @app.route("/ask", methods=["POST"])
 def ask():
     try:
-        data = request.get_json()
-        print("REQUEST:", data)
+        print("🔥 ASK ROUTE HIT")
+
+        data = request.get_json(force=True)
+        print("REQUEST DATA:", data)
 
         if not data:
             return jsonify({"error": "No JSON received"}), 400
@@ -134,12 +136,8 @@ def ask():
         return jsonify({"answer": answer})
 
     except Exception as e:
-        print("🔥 API ERROR:", str(e))
-        return jsonify({
-            "error": str(e),
-            "type": str(type(e)).__name__
-        }), 500
-
+        print("🔥 ERROR IN /ASK:", str(e))
+        return jsonify({"error": str(e)}), 500
 
 # -----------------------------
 # HEALTH CHECK ROUTE
