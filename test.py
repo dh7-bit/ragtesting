@@ -1,7 +1,5 @@
 from flask import Flask, request, jsonify
-import chromadb
 import os
-import requests
 from testnev import groq_chat
 from dotenv import load_dotenv
 from flask_cors import CORS
