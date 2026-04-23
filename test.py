@@ -74,6 +74,7 @@ except Exception as e:
 # -----------------------------
 def ask_rag(query, session_id):
     try:
+        print('taking query tranfering into embeddings')
         query_embedding = get_embedding(query)
 
         if collection is None:
@@ -127,13 +128,12 @@ def ask():
 
         query = data.get("query")
         session_id = data.get("session_id", "default")
-        return jsonify({"message": "Working URL"})
-        # if not query:
-        #     return jsonify({"error": "query missing"}), 400
+        if not query:
+            return jsonify({"error": "query missing"}), 400
 
-        # answer = ask_rag(query, session_id)
+        answer = ask_rag(query, session_id)
 
-        # return jsonify({"answer": answer})
+        return jsonify({"answer": answer})
 
     except Exception as e:
         print("🔥 ERROR IN /ASK:", str(e))
