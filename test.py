@@ -8,10 +8,8 @@ from flask_cors import CORS
 load_dotenv()
 app = Flask(__name__)
 CORS(app, origins=[
-    "https://ecommerceaiagentwebsite.onrender.com" # 👉 REPLACE THIS WITH YOUR DEPLOYED FRONTEND
+    "https://ecommerceaiagentwebsite.onrender.com"
 ])
-
-
 # -----------------------------
 # ROUTE (FULL DEBUG SAFE)
 # -----------------------------
