@@ -127,13 +127,13 @@ def ask():
 
         query = data.get("query")
         session_id = data.get("session_id", "default")
+        return jsonify({"message": "Working URL"})
+        # if not query:
+        #     return jsonify({"error": "query missing"}), 400
 
-        if not query:
-            return jsonify({"error": "query missing"}), 400
+        # answer = ask_rag(query, session_id)
 
-        answer = ask_rag(query, session_id)
-
-        return jsonify({"answer": answer})
+        # return jsonify({"answer": answer})
 
     except Exception as e:
         print("🔥 ERROR IN /ASK:", str(e))
