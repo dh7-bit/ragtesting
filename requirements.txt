@@ -1,5 +1,4 @@
 flask 
-chromadb
 requests
 gunicorn
 
